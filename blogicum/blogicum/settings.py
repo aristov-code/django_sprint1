@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+TEMPLATES_DIR = BASE_DIR / 'templates'
+
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'blog.apps.BlogConfig',
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'blogicum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,6 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static_dev',
+] 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
