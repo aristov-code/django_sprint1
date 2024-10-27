@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 
 
 posts = [
@@ -44,6 +45,8 @@ posts = [
     },
 ]
 
+posts_dict = {posts[x]['id']: posts[x] for x in range(len(posts))}
+
 
 def index(request):
     template = 'blog/index.html'
@@ -51,9 +54,12 @@ def index(request):
     return render(request, template, context)
 
 
-def post_detail(request, id):
+def post_detail(request, post_id):
     template = 'blog/detail.html'
-    context = {'post': posts[id]}
+    if post_id in posts_dict.keys():
+        context = {'post': posts_dict[post_id]}
+    else:
+        raise Http404(f'Post with id = {post_id} not found')
     return render(request, template, context)
 
 
